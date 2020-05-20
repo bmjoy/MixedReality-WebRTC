@@ -17,12 +17,15 @@ parameters:
 - name: npmPackageVersion
   type: string
   default: '0.0.1-preview.1'
+- name: scriptsRepo
+  type: string
+  default: ''
 
 resources:
   repositories:
   - repository: scripts
     type: git
-    name: $(ScriptsRepo)
+    name: ${{parameters.scriptsRepo}}
 
 stages:
 
