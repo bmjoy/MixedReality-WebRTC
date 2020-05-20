@@ -86,6 +86,9 @@ jobs:
       patterns: '**/*.@(pdb|dll)'
       path: 'libs/unity/library/Runtime/Plugins/Win32/x86_64'
 
+  # Signing
+  - template: pipelines/templates/steps-unity-release-sign.yaml@scripts
+
   # Write .npmrc
   - task: PowerShell@2
     displayName: 'Write .npmrc (library)'

@@ -18,6 +18,12 @@ parameters:
   type: string
   default: '0.0.1-preview.1'
 
+resources:
+  repositories:
+  - repository: scripts
+    type: git
+    name: $(ScriptsRepo)
+
 stages:
 
 # Compile all Release build variants of mrwebrtc.dll
