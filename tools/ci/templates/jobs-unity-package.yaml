@@ -87,7 +87,20 @@ jobs:
       path: 'libs/unity/library/Runtime/Plugins/Win32/x86_64'
 
   # Signing
-  - template: pipelines/templates/steps-unity-release-sign.yaml@scripts
+  - task: DownloadSecureFile@1
+    name: SignConfigFile
+    displayName: 'Download signing files'
+    inputs:
+      secureFile: 'mr-webrtc-unity-signconfig.xml'
+    timeoutInMinutes: 10
+  - task: PkgESCodeSign@10
+    displayName: 'Sign DLLs for Unity packages'
+    inputs:
+      signConfigXml: '$(SignConfigFile.secureFilePath)'
+      inPathRoot: 'libs/unity'
+      outPathRoot: 'libs/unity'
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
   # Write .npmrc
   - task: PowerShell@2
